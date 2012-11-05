@@ -22,7 +22,8 @@ class DemoController extends Controller
     }
 
     /**
-     * @Route("/hello/{name}", name="_demo_hello")
+     * @Route("/hello/{name}.{_format}", defaults={"_format"="html"}, name="_demo_hello",
+     	requirements={"_format"="html|xml|json"})
      * @Template()
      */
     public function helloAction($name)
