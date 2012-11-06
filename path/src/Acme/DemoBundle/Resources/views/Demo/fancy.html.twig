@@ -5,7 +5,11 @@
 {% block content_header '' %}
 
 {% block content %}
-fancy : {{ name }}
+	fancy : {{ name }}
+	
+	{% for msg in app.session.getFlashBag().get('notice') %}
+		{{ msg }}
+	{% endfor %}
 {% endblock %}
 
 
