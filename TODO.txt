@@ -1,0 +1,2 @@
+# 2012 11 05 
+=> chapter 4 "Architecture" of Symfony_quick_tour_2.1.pdf
