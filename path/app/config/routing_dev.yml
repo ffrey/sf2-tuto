@@ -1,3 +1,7 @@
+_chap1_raw_response:
+    pattern:  /contact
+    defaults: { _controller: AcmeDemoBundle:Main:contact }
+    
 _welcome:
     pattern:  /
     defaults: { _controller: AcmeDemoBundle:Welcome:index }

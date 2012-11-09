@@ -1,0 +1,15 @@
+{# 
+/**
+ * @param :
+ * result array
+ */
+#}
+{% extends "AcmeBlogBundle::layout.html.twig" %}
+
+{% block title "List of posts" %}
+
+{% block content %}
+   {% for post in result %}
+   		- titre : <a href="{{ path('_blog_show') }}?id={{ post.id }}">{{ post.title }}</a><br/>
+   {% endfor %}
+{% endblock %}
