@@ -1,0 +1,7 @@
+# routing
+## passing parameters
+get params can be passed to action directly through args !!!
+pattern:  /hello/{name} => public function indexAction($name) !
+
+# bundles vs plugins
+sf 1 : ProjectConfiguration::enablePlugins() + app/settings.yml>enabled_modules => sf2 : AppKernel::registerBundles() + everything is a bundle in sf2 !
