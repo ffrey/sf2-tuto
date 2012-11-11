@@ -1,0 +1,15 @@
+# BUNDLE
+- all under src/
+
+- a Bundle = 
+-- minimum : a file in src/<generic name>/<name of bundle>/<file containing the bundle class>
+             a registration within app/appKernel.php::registerBundles()
+             
+-- oft-used : controllers under src/Controller/
+              src/Resources : config/views
+              
+# creating a page : 
+1/ create a route
+2/ create an action for the route
+3/ optional : create a template for the display of the response's content
+

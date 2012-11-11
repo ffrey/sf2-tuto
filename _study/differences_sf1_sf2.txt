@@ -1,0 +1,15 @@
+# routing
+## passing parameters
+get params can be passed to action directly through args !!! (+ all defaults indexes !)
+pattern:  /hello/{name} => public function indexAction($name) !
+
+
+
+# bundles vs plugins
+sf 1 : ProjectConfiguration::enablePlugins() + app/settings.yml>enabled_modules => sf2 : AppKernel::registerBundles() + everything is a bundle in sf2 !
+
+# controllers
+sf2 : a Controller does not have to extend a fw class !
+
+sf1 : only sfRequest as arg !
+
