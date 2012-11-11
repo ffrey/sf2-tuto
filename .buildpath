@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="path/app"/>
+	<buildpathentry kind="src" path="path/src/Acme/DemoBundle"/>
+	<buildpathentry kind="src" path="path/vendor"/>
+	<buildpathentry kind="src" path="path/web"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
