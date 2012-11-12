@@ -18,6 +18,7 @@ class BlogController extends Controller
 	 */
 	public function listAction()
 	{
+
 		$posts = array ( 
 					0 => array ( 'id' => '1', 'title' => 'Pride and prejudice', ), 
 					1 => array ( 'id' => '2', 'title' => 'Les raisins de la colere', ), 

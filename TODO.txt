@@ -1,2 +1,2 @@
-# 2012 11 09 
-=> p.40 of Symfony_book_2.1.pdf
+# 2012 11 12 
+=> 'routing' p.57 of Symfony_book_2.1.pdf

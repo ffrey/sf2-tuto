@@ -1,0 +1,4 @@
+# access to fw objects
+## session
+sf1 : $sf_user->getFlash('notice')
+sf2 : app.session.flashbag.get('notice')

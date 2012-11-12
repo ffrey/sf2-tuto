@@ -13,3 +13,18 @@ sf2 : a Controller does not have to extend a fw class !
 
 sf1 : only sfRequest as arg !
 
+# controller
+## session
+### flash
+sf1 : $this->getUser()->setFlash()
+sf2 : $this->get('session')->getFlashBag()->add()
+
+## request
+sf1 : 
+passed as arg !
+$req->getGetParameter()
+$req->getPostParameter()
+sf2 : 
+$this->getRequest();
+$request->query->get('page'); // get a $_GET parameter
+$request->request->get('page'); // get a $_POST parameter
