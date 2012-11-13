@@ -1,0 +1,43 @@
+# twig
+{{ }} = echo
+{% %} = instruction
+{# #} = comment
+
+# templating
+sf1 : slots and $sf_content (layout defined by app)
+slot('name')
+
+end_slot()
+
+sf2 Twig : blocks and layout defined by templates (extends !)
+{% block sidebar %}
+
+{% endblock %}
+
+{% extends '::base.html.twig' %}
+[bundle]:[controller]:template => src/<generic>/<bundle>/Resources/views/<controller>/template
+[bundle]::template => src/<generic>/<bundle>/Resources/views/template
+::template => app/Resources/views/template
+
+## includes
+{% include 'AcmeArticleBundle:Article:articleDetails.html.twig' with {'article':article} %}
+
+## controller embedding
+{% render "AcmeArticleBundle:Article:recentArticles" with {'max': 3} %}
+
+## linking
+url()/path()
+
+## assets
+asset() # version regeneration on deployement !
+
+## global include of assets
+through blocks !
+
+sf2 PHP : 
+$view->extend('::layout.html.php')
+
+$view['slots']->set('name')
+
+## linking
+$view['router']->generate('_welcome', array(), true)

@@ -1,2 +1,2 @@
 # 2012 11 13
-=> 'templating' chap 7
+=> 'templating' chap 7 : p.80 Global Template Variables

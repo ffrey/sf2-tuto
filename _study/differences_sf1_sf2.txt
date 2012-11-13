@@ -33,3 +33,16 @@ sf2 :
 $this->getRequest();
 $request->query->get('page'); // get a $_GET parameter
 $request->request->get('page'); // get a $_POST parameter
+
+# template
+sf1 : 
+## global include of assets
+dedicated helpers : include_javascripts(), etc.
+
+sf2 : 
+## global include of assets
+through blocks !
+
+## improved block overriding
+parent content can be retrieved : parent() !
+
