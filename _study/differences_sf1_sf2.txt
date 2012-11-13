@@ -1,5 +1,10 @@
 # routing
 ## passing parameters
+sf1 :
+2 main indices : url/params
+
+sf2 :
+2 main indices : pattern/defaults
 get params can be passed to action directly through args !!! (+ all defaults indexes !)
 pattern:  /hello/{name} => public function indexAction($name) !
 

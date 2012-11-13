@@ -16,9 +16,12 @@ class BlogController extends Controller
 	 * @Route("/", name="_blog_accueil")
 	 * @Template()
 	 */
-	public function listAction()
+	public function listAction($_controller, $_route)
 	{
-
+		$db = true; $origin = __CLASS__.'::'.__METHOD__;
+		if ($db) {
+			var_dump($_controller, $_route);
+		}
 		$posts = array ( 
 					0 => array ( 'id' => '1', 'title' => 'Pride and prejudice', ), 
 					1 => array ( 'id' => '2', 'title' => 'Les raisins de la colere', ), 

@@ -1,0 +1,23 @@
+# extra config (beyond pattern/param)
+## requirements :
+special indexes start with '_' : 
+_format
+_method
+
+other indexes are param names : their value is the regex they must conform to
+
+## controller params
+defaults args / placeholders are available directly as args for controller methods !
+
+=> always available : $_controller, $_route
+
+## useful console methods : 
+router:debug, router:match
+
+## url generation
+### within controller
+$this->get('router')->generate('blog_show', array('slug' => 'my-blog-post'));
+
+### within templates
+url() / path()
+
