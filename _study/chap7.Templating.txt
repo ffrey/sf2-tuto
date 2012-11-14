@@ -41,3 +41,16 @@ $view['slots']->set('name')
 
 ## linking
 $view['router']->generate('_welcome', array(), true)
+
+## output escaping
+sf1 : 
+configuration > $var->getRaw()... (complicated :-(...
+
+sf2 : 
+### Twig
+by default > {{ var|raw }}
+### php
+$view->escape($var)
+
+# console !
+php app/console twig:lint [resource] : checks for any twig syntax error

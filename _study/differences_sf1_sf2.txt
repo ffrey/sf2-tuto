@@ -46,3 +46,17 @@ through blocks !
 ## improved block overriding
 parent content can be retrieved : parent() !
 
+## superglobals
+app.security / ?
+app.user / $sf_user
+app.request / $sf_request
+app.session / $sf_user
+app.environment / sfConfig::get('sf_environment')
+app.debug / sfConfig::get('sf...')
+
+## overriding fw templates : 400, 500, etc.
+sf1 : 
+a sub-folder under /config !-(
+sf2 : 
+same logic as for any bundle !-)
+
