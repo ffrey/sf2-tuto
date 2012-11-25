@@ -1,2 +1,2 @@
-# 2012 11 13
-=> 'templating' chap 7 : p.80 Global Template Variables
+# 2012 11 25
+=> 'doctrine' chap 8 : p.98 Custom Repository Classes

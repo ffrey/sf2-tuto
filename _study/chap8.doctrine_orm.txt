@@ -1,0 +1,29 @@
+# p.90
+
+## querying
+d1 : 
+records / tables / manager (for queries)
+
+d2 : 
+entities / repositories / manager (for queries)
+## dealing with a row
+new Product()
+Repository::persist($product)
+Repository::flush()
+
+Repository::remove($product)
+Repository::flush()
+
+## retrieving rows
+### magic methods
+Repository::find(), findOneBy<Method>(), etc.
+
+### DQL
+Manager::createQuery(<DQL>)->setParameter(s)()
+
+### query builder
+Repository::createQueryBuilder('p')
+->where()
+->setParameter()
+->orderBy()
+...

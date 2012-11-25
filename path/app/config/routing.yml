@@ -15,3 +15,8 @@ _blog:
     resource: "@AcmeBlogBundle/Controller/BlogController.php"
     type:     annotation
     prefix:   /blog
+    
+_store:
+    resource: "@AcmeStoreBundle/Controller/DefaultController.php"
+    type:      annotation
+    prefix:    /st

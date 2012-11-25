@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+	{# show a product #}
+	{% for product in products %}
+		titre : {{ product.name }} <br/>
+		Desc : {{product.description}} <br/>
+		Prix : {{ product.price }} <br/>
+	{% endfor %}
+	
+{% endblock %}
