@@ -7,18 +7,33 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Acme\StoreBundle\Entity\Product;
+use Acme\StoreBundle\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
 	/**
+	 * @Route("/list")
+	 * @Template()
+	 */
+	public function listAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+		$products = $em->getRepository('AcmeStoreBundle:Product')
+					->findAllOrderedByName();
+		$tplVars = array('products' => $products);
+		return $this->render('AcmeStoreBundle:Default:list.html.twig', $tplVars);
+	}
+	
+	/**
 	 * @Route("/hello/{name}")
 	 * @Template()
 	 */
 	public function indexAction($name)
-	{
-		return array('name' => $name);
-	}
+    {
+         return array('name' => $name);
+    }
+	
 
 	/**
 	 * @Route("/create/{name}/{desc}/{price}")
@@ -27,14 +42,20 @@ class DefaultController extends Controller
 	 */
 	public function createAction($name, $desc, $price)
 	{
+		$category = new Category();
+		$category->setName('Science Fiction');
+		
 		$product = new Product();
 		$product->setName($name);
 		$product->setPrice($price);
 		$product->setDescription($desc);
+		$product->setCategory($category);
+		
 		$em = $this->getDoctrine()->getManager();
+		$em->persist($category);
 		$em->persist($product);
 		$em->flush();
-		return new Response('Created product id '.$product->getId());
+		return new Response('Created product id '.$product->getId() . ' and category id is : ' . $category->getId() );
 	}
 
 	/**
@@ -45,19 +66,48 @@ class DefaultController extends Controller
 	 */
 	public function showAction($id)
 	{
+		$db = false; $origin = __CLASS__.'::'.__METHOD__;
 		$repository = $this->getDoctrine()->getRepository('AcmeStoreBundle:Product');
 
-		$product = $repository->findOneById($id);
+		$product = $repository->findOneByIdJoinedToCategory($id);
+		$category = $product->getCategory();
+		if ($db) {
+			var_dump($origin
+			, 'product', get_class($product)
+			, 'category true class', get_class($category)
+			);
+			exit;
+		}
+		$category_name = $category->getName();
+		$tplVars = array(
+		'product'  => $product,
+		'category_name' => $category_name,
+		);
+		return $this->render('AcmeStoreBundle:Default:show.html.twig', $tplVars);
+		//		return new Response('Product :  '.serialize($product) );
+	}
+	
+	/**
+	 * @Route("/list/category/{id}")
+	 */
+	public function showCategoryAction($id)
+	{
+		$repository = $this->getDoctrine()->getRepository('AcmeStoreBundle:Category');
 
-		return $this->render('AcmeStoreBundle:Default:show.html.twig', array('product' => $product));
+		$category = $repository->findOneById($id);
+		
+		$products = $category->getProducts();
+		
+		$tplVars = array(
+		'products'  => $products,
+		'category' => $category,
+		);
+		return $this->render('AcmeStoreBundle:Default:listCategory.html.twig', $tplVars);
 		//		return new Response('Product :  '.serialize($product) );
 	}
 
 	/**
 	 * @Route("/update/{id}/{desc}")
-	 * @param unknown_type $id
-	 * @param unknown_type $desc
-	 * @return unknown_type
 	 */
 	public function updateAction($id, $desc)
 	{
