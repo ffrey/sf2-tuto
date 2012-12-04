@@ -10,8 +10,41 @@ use Acme\DemoBundle\Form\ContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Acme\BlogBundle\Entity\Author;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\Email;
+
 class BlogController extends Controller
 {
+	/**
+	 * @Route("/validate", name="_blog_validation")
+	 * @Template()
+	 */
+	public function indexAction()
+	{
+		$author = new Author();
+		// ... do something to the $author object
+		$validator = $this->get('validator');
+		$author->gender = 'hello';
+		$errors = $validator->validate($author);
+		
+		$emailConstraint = new Email();
+		// all constraint "options" can be set this way
+		$emailConstraint->message = 'Invalid email address';
+		// use the validator to validate the value
+		$errorList = $this->get('validator')->validateValue('ljk', $emailConstraint);
+		foreach ($errorList AS $error) {
+			$errors[] = $error;
+		}
+		if (count($errors) > 0) {
+			return $this->render('AcmeBlogBundle:Blog:validate.html.twig', array(
+				'errors' => $errors,
+			));
+		} else {
+			return new Response('The author is valid! Yes!');
+		}
+	}
+	
 	/**
 	 * @Route("/", name="_blog_accueil")
 	 * @Template()

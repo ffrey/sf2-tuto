@@ -1,0 +1,6 @@
+Acme\BlogBundle\Entity\Author:
+  properties:
+    name:
+      - NotBlank: ~
+    gender:
+      - Choice: { choices: [male, female], message: Choose a valid gender. }
