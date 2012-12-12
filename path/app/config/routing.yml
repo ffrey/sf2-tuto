@@ -1,3 +1,8 @@
+acme_task:
+    resource: "@AcmeTaskBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /task
+
 acme_store:
     resource: "@AcmeStoreBundle/Controller/StoreController.php"
     type:     annotation

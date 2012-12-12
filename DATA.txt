@@ -1,4 +1,6 @@
 # pubtech
-http://sf2_basic.local/
+building a fw : http://sf2_basic.local/
+
+
 # github : 
 ffrey / gTkxz097!

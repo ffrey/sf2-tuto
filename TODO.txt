@@ -1,2 +1,2 @@
-# 2012 11 25
-=> 'doctrine' chap 8 : p.98 Custom Repository Classes
+# 2012 12 04
+=> 'forms' chap 12 : p.140 Custom Repository Classes
