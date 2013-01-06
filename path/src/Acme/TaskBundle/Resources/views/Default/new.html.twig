@@ -1,5 +1,12 @@
-{# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
+{% form_theme form 'AcmeTaskBundle:Form:fields.html.twig' %}
 <form action="{{ path('task_new') }}" method="post" {{ form_enctype(form) }}>
-	{{ form_widget(form) }}
+	{{ form_errors(form) }}
+	{{ form_row(form.task) }}
+	{{ form_row(form.dueDate) }}
+	<h3>Category</h3>
+<div class="category">
+{{ form_row(form.category.name) }}
+</div>
+	{{ form_rest(form) }}
 	<input type="submit" />
 </form>

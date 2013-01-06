@@ -1,0 +1,33 @@
+# creation de form
+1/ à partir d'un objet FormType
+$this->container->get('form.factory')->create(FormTypeInterface $type,[Object|array] $data, $options) 
+[ctr shortcut : ->createForm()]
+
+2/ à la volée dans le Ctrl : à partir d'un objet/array > puis utiliser les méthodes de création de champs (add(), getForm(), ...)
+$this->container->get('form.factory')->createForm() 
+[ctr shortcut : ->createFormBuilder([Object|array] $data, $options)]
+
+# gestion de form : class 
+array|Object : ->getData() [return depends on $data above]
+
+## validation
+règles sont définies en tant qu'objet Collection of Constraints de la propriété 'constraints' : 
+- dans une classe FormType::setDefaultOptions()
+- passées dans l'objet $options de Ctrl::createFormBuilder()
+
+# overriding des templates
+
+! tous les fragments de base sont définis dans : 
+vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form/form_<div|table>_layout.html.twig
+
+chaque fragment est nommé selon : 
+<type>_<part> (exemple : textarea_widget < form_widget)
+
+a) chaque fragment peut être overridé à partir de templates placés dans <bundle courant>/Resources/views/Form/<fields|...>.html.twig
+et importés dans le template voulu avec le helper 'form_theme'
+
+b) l'overriding peut se faire au niveau applicatif dans app/config/config.yml
+
+c) ! l'overriding peut au contraire se faire au niveau d'un seul template !
+<= {% form_theme form _self %} permet de définir les fragments à l'intérieur 
+du template lui-même !
