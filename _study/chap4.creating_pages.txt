@@ -5,8 +5,8 @@
 -- minimum : a file in src/<generic name>/<name of bundle>/<file containing the bundle class>
              a registration within app/appKernel.php::registerBundles()
              
--- oft-used : controllers under src/Controller/
-              src/Resources : config/views
+-- oft-used : controllers under Controller/
+              config,templates under Resources/ config|views
               
 # creating a page : 
 1/ create a route

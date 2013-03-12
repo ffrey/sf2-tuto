@@ -1,0 +1,14 @@
+# forms
+## SF1
+objets form
+avec widgetSchema et validatorSchema
+
+on bind un objet au form
+
+## SF2
+ce sont des objets Type auxquels on passe un objet Form !
+
+les règles de validation sont uniquement celles de l'objet bindé !!!
+
+les templates de formulaire s'overrident à partir des fichiers de templates (syst
+ des blocks !)

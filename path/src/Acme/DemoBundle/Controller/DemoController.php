@@ -29,7 +29,7 @@ class DemoController extends Controller
 	public function helloAction($name)
 	{
 		$db = false; $origin = __CLASS__.'::'.__METHOD__;
-		if (true) {
+		if (false) {
 			$name = 'redirectMan';
 			$url = $this->generateUrl('_demo_fancy', array('name' => $name) );
 			if ($db) {
@@ -40,7 +40,7 @@ class DemoController extends Controller
 			$session = $this->getRequest()->getSession();
 			$session->getFlashBag()->add('notice', 'Congratulations, your redirect succeeded!');
 			return $this->redirect($url);
-		} else if (true) {
+		} else if (false) {
 			$name = 'forwardMan';
 			$response = $this->forward('AcmeDemoBundle:Demo:fancy', array('name' => $name, 'color' =>
 					'green'));
