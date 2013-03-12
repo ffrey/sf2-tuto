@@ -29,11 +29,13 @@ class DefaultController extends Controller
 		$task = new Task();
 		$task->setTask('Write a blog post');
 		$task->setDueDate(new \DateTime('tomorrow'));
-		$form = $this->createFormBuilder($task)
+		$form = $this->createFormBuilder($task, array(
+				'validation_groups' => array('registration'),
+		))
 		->add('task', 'text')
 		->add('dueDate', 'date')
 		->getForm();
-		
+
 		if ($request->isMethod('POST')) {
 			$form->bind($request);
 			if ($form->isValid()) {
@@ -41,9 +43,24 @@ class DefaultController extends Controller
 				return $this->redirect($this->generateUrl('task_success'));
 			}
 		}
-		
+
 		return $this->render('AcmeTaskBundle:Default:new.html.twig', array(
 				'form' => $form->createView(),
 		));
 	}
+
+	/**
+	 * @Route("/ok", name="task_success")
+	 * @Template()
+	 */
+	public function okAction(Request $request)
+	{
+		// create a task and give it some dummy data for this example
+		$msg = 'simply grandiose...';
+
+		return $this->render('AcmeTaskBundle:Default:ok.html.twig', array(
+				'msg' => $msg,
+		));
+	}
+
 }

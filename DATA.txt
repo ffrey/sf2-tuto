@@ -1,6 +1,11 @@
 # pubtech
-building a fw : http://sf2_basic.local/
 
+sf2.local       => "C:\PROJETS_WEB\www\sf2\sf2-tuto\path\web"
 
+	
 # github : 
 ffrey / gTkxz097!
+
+
+# construction d'un fw sf2 from scratch
+sf2_basic.local => "C:\PROJETS_WEB\www\sf2\sf2-tuto\basic"

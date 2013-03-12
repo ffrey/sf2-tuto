@@ -1,0 +1,3 @@
+# Controller offers a shortcut method to creating forms on the fly : 
+FormBuilder Controller::createFormBuilder(object <instance to bind>[, array <options>])
+

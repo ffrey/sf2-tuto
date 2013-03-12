@@ -26,7 +26,7 @@ sf2 Twig : blocks and layout defined by templates (extends !)
 {% render "AcmeArticleBundle:Article:recentArticles" with {'max': 3} %}
 
 ## linking
-url()/path()
+url(<route_name>)/path(<route_name>[, array <params>])  // sf14 : url_for() : ? on pouvait passer directement <module>/<action> !
 
 ## assets
 asset() # version regeneration on deployement !
