@@ -1,12 +1,20 @@
-{% form_theme form 'AcmeTaskBundle:Form:fields.html.twig' %}
+{% extends '::base.html.twig' %}
+{% block body %}
+{% form_theme form 'AcmeTaskBundle:Form:fields.html.twig'
+'AcmeTaskBundle:Form:fields2.html.twig' %}
+
 <form action="{{ path('task_new') }}" method="post" {{ form_enctype(form) }}>
 	{{ form_errors(form) }}
 	{{ form_row(form.task) }}
 	{{ form_row(form.dueDate) }}
 	<h3>Category</h3>
 <div class="category">
-{{ form_row(form.category.name) }}
+{# TODO : 2013 03 18 : ! erreur : Fatal error: Declaration of Acme\TaskBundle\Form\Type\CategoryType::setDefaultOptions() must be compatible with that of Symfony\Component\Form\FormTypeInterface::setDefaultOptions() 
+in C:\PROJETS_WEB\sf2\sf2-tuto\path\src\Acme\TaskBundle\Form\Type\CategoryType.php on line 24
+#}
+{# form_row(form.category.name) #}
 </div>
 	{{ form_rest(form) }}
 	<input type="submit" />
 </form>
+{% endblock %}

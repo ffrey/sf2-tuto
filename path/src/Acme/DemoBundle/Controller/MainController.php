@@ -13,10 +13,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 // tuto
 use Symfony\Component\HttpFoundation\Response;
 
-class MainController extends Controller
-{
-	public function contactAction()
-	{
+class MainController extends Controller {
+	public function contactAction() {
 		return new Response('<h1>Contact us !</h1>');
 	}
 

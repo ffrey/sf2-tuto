@@ -10,8 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Acme\StoreBundle\Entity\ProductRepository")
  */
-class Product
-{
+class Product {
 	/**
 	 * @var integer $id
 	 *
@@ -60,8 +59,7 @@ class Product
 	 *
 	 * @return integer
 	 */
-	public function getId()
-	{
+	public function getId() {
 		return $this->id;
 	}
 
@@ -71,8 +69,7 @@ class Product
 	 * @param string $name
 	 * @return Product
 	 */
-	public function setName($name)
-	{
+	public function setName($name) {
 		$this->name = $name;
 
 		return $this;
@@ -83,8 +80,7 @@ class Product
 	 *
 	 * @return string
 	 */
-	public function getName()
-	{
+	public function getName() {
 		return $this->name;
 	}
 
@@ -94,8 +90,7 @@ class Product
 	 * @param float $price
 	 * @return Product
 	 */
-	public function setPrice($price)
-	{
+	public function setPrice($price) {
 		$this->price = $price;
 
 		return $this;
@@ -106,8 +101,7 @@ class Product
 	 *
 	 * @return float
 	 */
-	public function getPrice()
-	{
+	public function getPrice() {
 		return $this->price;
 	}
 
@@ -117,8 +111,7 @@ class Product
 	 * @param string $description
 	 * @return Product
 	 */
-	public function setDescription($description)
-	{
+	public function setDescription($description) {
 		$this->description = $description;
 
 		return $this;
@@ -129,8 +122,7 @@ class Product
 	 *
 	 * @return string
 	 */
-	public function getDescription()
-	{
+	public function getDescription() {
 		return $this->description;
 	}
 
@@ -140,8 +132,8 @@ class Product
 	 * @param Acme\StoreBundle\Entity\Category $category
 	 * @return Product
 	 */
-	public function setCategory(\Acme\StoreBundle\Entity\Category $category = null)
-	{
+	public function setCategory(
+			\Acme\StoreBundle\Entity\Category $category = null) {
 		$this->category = $category;
 
 		return $this;
@@ -152,8 +144,7 @@ class Product
 	 *
 	 * @return Acme\StoreBundle\Entity\Category
 	 */
-	public function getCategory()
-	{
+	public function getCategory() {
 		return $this->category;
 	}
 
@@ -163,8 +154,7 @@ class Product
 	 * @param dateTime $createdAt
 	 * @return Product
 	 */
-	public function setCreatedAt(\dateTime $createdAt)
-	{
+	public function setCreatedAt(\dateTime $createdAt) {
 		$this->created_at = $createdAt;
 
 		return $this;
@@ -175,8 +165,7 @@ class Product
 	 *
 	 * @return dateTime
 	 */
-	public function getCreatedAt()
-	{
+	public function getCreatedAt() {
 		return $this->created_at;
 	}
 
@@ -184,8 +173,7 @@ class Product
 	 * @TODO : cannot seem to be able to work properly ???
 	 * @ORM\PrePersist
 	 */
-	public function setCreatedAtValue()
-	{
+	public function setCreatedAtValue() {
 		die(__METHOD__);
 		$this->created_at = new \DateTime();
 	}

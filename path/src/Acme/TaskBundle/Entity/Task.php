@@ -1,42 +1,42 @@
-<?php 
+<?php
 
 // src/Acme/TaskBundle/Entity/Task.php
 namespace Acme\TaskBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
-class Task
-{
+class Task {
+	/**
+	 * TODO : 2013 03 18 : ne fonctionne pas...
+	 * @Assert\MinLength(
+	 *   limit=3,
+	 *   message="Title should have at least {{ limit }} characters."
+	 * )
+	 */
 	protected $task;
 	protected $dueDate;
-	
+
 	/**
 	 * @Assert\Type(type="Acme\TaskBundle\Entity\Category")
 	 */
 	protected $category;
 	// ...
-	public function getCategory()
-	{
+	public function getCategory() {
 		return $this->category;
 	}
-	
-	public function setCategory(Category $category = null)
-	{
+
+	public function setCategory(Category $category = null) {
 		$this->category = $category;
 	}
-	
-	public function getTask()
-	{
+
+	public function getTask() {
 		return $this->task;
 	}
-	public function setTask($task)
-	{
+	public function setTask($task) {
 		$this->task = $task;
 	}
-	public function getDueDate()
-	{
+	public function getDueDate() {
 		return $this->dueDate;
 	}
-	public function setDueDate(\DateTime $dueDate = null)
-	{
+	public function setDueDate(\DateTime $dueDate = null) {
 		$this->dueDate = $dueDate;
 	}
 }

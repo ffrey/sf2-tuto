@@ -1,0 +1,3 @@
+# annotations
+si on utilise la configuration par annotation, l'utilisation d'annotation perso est impossible 
+("[Semantical Error] The annotation "@TODO" in property Acm...")

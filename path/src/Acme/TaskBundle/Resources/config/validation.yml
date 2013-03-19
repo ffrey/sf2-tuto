@@ -1,7 +1,7 @@
 Acme\TaskBundle\Entity\Task:
   properties:
     task:
-      - NotBlank: ~
+      - Email: ~
     dueDate:
       - NotBlank: ~
       - Type: \DateTime

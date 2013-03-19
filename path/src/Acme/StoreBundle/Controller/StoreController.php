@@ -11,22 +11,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Component\HttpFoundation\Response;
 
-class StoreController extends Controller
-{
+class StoreController extends Controller {
 	/**
 	 * @Route("/hello/{name}", name="_store_accueil")
 	 * @Template()
 	 */
-	public function helloAction($name, $_controller, $_route)
-	{
-		$db = false; $origin = __CLASS__.'::'.__METHOD__;
+	public function helloAction($name, $_controller, $_route) {
+		$db = false;
+		$origin = __CLASS__ . '::' . __METHOD__;
 		if ($db) {
 			var_dump($name, $_controller, $_route);
 		}
 
-		return new Response(sprintf('hello %s from store', $name) );
-//		return $this->render('AcmeBlogBundle:Blog:list.html.twig', array('result' => $posts));
+		return new Response(sprintf('hello %s from store', $name));
+		//		return $this->render('AcmeBlogBundle:Blog:list.html.twig', array('result' => $posts));
 	}
 
-	
 }

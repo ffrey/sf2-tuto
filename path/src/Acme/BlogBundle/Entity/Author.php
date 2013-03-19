@@ -1,6 +1,5 @@
-<?php 
+<?php
 namespace Acme\BlogBundle\Entity;
-class Author
-{
-public $name, $gender;
+class Author {
+	public $name, $gender;
 }
