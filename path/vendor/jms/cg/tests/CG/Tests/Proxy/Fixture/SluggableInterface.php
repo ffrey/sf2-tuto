@@ -2,7 +2,6 @@
 
 namespace CG\Tests\Proxy\Fixture;
 
-interface SluggableInterface
-{
-    function getSlug();
+interface SluggableInterface {
+	function getSlug();
 }

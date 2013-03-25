@@ -22,43 +22,43 @@ use JMS\AopBundle\Aop\PointcutContainer;
 
 use JMS\AopBundle\Aop\InterceptorLoader;
 
-class InterceptorLoaderTest extends \PHPUnit_Framework_TestCase
-{
-    public function testLoadInterceptors()
-    {
-        $interceptor = $this->getMock('CG\Proxy\MethodInterceptorInterface');
+class InterceptorLoaderTest extends \PHPUnit_Framework_TestCase {
+	public function testLoadInterceptors() {
+		$interceptor = $this->getMock('CG\Proxy\MethodInterceptorInterface');
 
-        list($loader, $container) = $this->getLoader(array(
-            'JMS\AopBundle\Tests\Aop\InterceptorLoaderTestClass' => array(
-                'foo' => array('foo'),
-            ),
-        ));
+		list($loader, $container) = $this
+				->getLoader(
+						array(
+								'JMS\AopBundle\Tests\Aop\InterceptorLoaderTestClass' => array(
+										'foo' => array('foo'),),));
 
-        $container
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('foo'))
-            ->will($this->returnValue($interceptor))
-        ;
+		$container->expects($this->once())->method('get')
+				->with($this->equalTo('foo'))
+				->will($this->returnValue($interceptor));
 
-        $method = new \ReflectionMethod('JMS\AopBundle\Tests\Aop\InterceptorLoaderTestClass', 'foo');
+		$method = new \ReflectionMethod(
+				'JMS\AopBundle\Tests\Aop\InterceptorLoaderTestClass', 'foo');
 
-        $this->assertSame(array($interceptor), $loader->loadInterceptors($method));
-        // yes, twice
-        $this->assertSame(array($interceptor), $loader->loadInterceptors($method));
-    }
+		$this
+				->assertSame(array($interceptor),
+						$loader->loadInterceptors($method));
+		// yes, twice
+		$this
+				->assertSame(array($interceptor),
+						$loader->loadInterceptors($method));
+	}
 
-    private function getLoader(array $interceptors = array())
-    {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+	private function getLoader(array $interceptors = array()) {
+		$container = $this
+				->getMock(
+						'Symfony\Component\DependencyInjection\ContainerInterface');
 
-        return array(new InterceptorLoader($container, $interceptors), $container);
-    }
+		return array(new InterceptorLoader($container, $interceptors),
+				$container);
+	}
 }
 
-class InterceptorLoaderTestClass
-{
-    public function foo()
-    {
-    }
+class InterceptorLoaderTestClass {
+	public function foo() {
+	}
 }

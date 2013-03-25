@@ -1,4 +1,4 @@
-# creation de form
+# creation de form (p. 140 du Symfony_book_2.1.pdf)
 1/ à partir d'un objet FormType
 $this->container->get('form.factory')->create(FormTypeInterface $type,[Object|array] $data, $options) 
 [ctr shortcut : ->createForm()]
@@ -31,3 +31,11 @@ b) l'overriding peut se faire au niveau applicatif dans app/config/config.yml
 c) ! l'overriding peut au contraire se faire au niveau d'un seul template !
 <= {% form_theme form _self %} permet de définir les fragments à l'intérieur 
 du template lui-même !
+
+# VALIDATION
+la validation se fait via src/<app>/<bundle>/Resources/config/validation.yml
+<= autres poss : 
+- activer les annotations placées dans les classes d'entités (activation dans app/config/config.yml)
+
+MAIS 2013 03 25 : bizarrement, si nous sommes dans un navigateur sans html 5 (ie 8 pour ne pas le nommer...), il ne semble plus y avoir de validation côté 
+serveur !!!

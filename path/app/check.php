@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__).'/SymfonyRequirements.php';
+require_once dirname(__FILE__) . '/SymfonyRequirements.php';
 
 $symfonyRequirements = new SymfonyRequirements();
 
@@ -12,13 +12,14 @@ echo "*  Symfony requirements check  *\n";
 echo "*                              *\n";
 echo "********************************\n\n";
 
-echo $iniPath ? sprintf("* Configuration file used by PHP: %s\n\n", $iniPath) : "* WARNING: No configuration file (php.ini) used by PHP!\n\n";
+echo $iniPath ? sprintf("* Configuration file used by PHP: %s\n\n", $iniPath)
+		: "* WARNING: No configuration file (php.ini) used by PHP!\n\n";
 
 echo "** ATTENTION **\n";
 echo "*  The PHP CLI can use a different php.ini file\n";
 echo "*  than the one used with your web server.\n";
 if ('\\' == DIRECTORY_SEPARATOR) {
-    echo "*  (especially on the Windows platform)\n";
+	echo "*  (especially on the Windows platform)\n";
 }
 echo "*  To be on the safe side, please also launch the requirements check\n";
 echo "*  from your web server using the web/config.php script.\n";
@@ -26,30 +27,29 @@ echo "*  from your web server using the web/config.php script.\n";
 echo_title('Mandatory requirements');
 
 foreach ($symfonyRequirements->getRequirements() as $req) {
-    echo_requirement($req);
+	echo_requirement($req);
 }
 
 echo_title('Optional recommendations');
 
 foreach ($symfonyRequirements->getRecommendations() as $req) {
-    echo_requirement($req);
+	echo_requirement($req);
 }
 
 /**
  * Prints a Requirement instance
  */
-function echo_requirement(Requirement $requirement)
-{
-    $result = $requirement->isFulfilled() ? 'OK' : ($requirement->isOptional() ? 'WARNING' : 'ERROR');
-    echo ' ' . str_pad($result, 9);
-    echo $requirement->getTestMessage() . "\n";
+function echo_requirement(Requirement $requirement) {
+	$result = $requirement->isFulfilled() ? 'OK'
+			: ($requirement->isOptional() ? 'WARNING' : 'ERROR');
+	echo ' ' . str_pad($result, 9);
+	echo $requirement->getTestMessage() . "\n";
 
-    if (!$requirement->isFulfilled()) {
-        echo sprintf("          %s\n\n", $requirement->getHelpText());
-    }
+	if (!$requirement->isFulfilled()) {
+		echo sprintf("          %s\n\n", $requirement->getHelpText());
+	}
 }
 
-function echo_title($title)
-{
-    echo "\n** $title **\n\n";
+function echo_title($title) {
+	echo "\n** $title **\n\n";
 }

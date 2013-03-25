@@ -2,6 +2,5 @@
 
 namespace Metadata\Tests\Fixtures\ComplexHierarchy;
 
-interface InterfaceA
-{
+interface InterfaceA {
 }

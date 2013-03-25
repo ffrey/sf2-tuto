@@ -2,6 +2,5 @@
 
 namespace CG\Tests\Proxy\Fixture;
 
-class SimpleClass
-{
+class SimpleClass {
 }

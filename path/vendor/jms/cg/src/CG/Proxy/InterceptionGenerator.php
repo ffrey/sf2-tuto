@@ -35,83 +35,76 @@ use CG\Generator\PhpClass;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class InterceptionGenerator implements GeneratorInterface
-{
-    private $prefix = '__CGInterception__';
-    private $filter;
-    private $requiredFile;
+class InterceptionGenerator implements GeneratorInterface {
+	private $prefix = '__CGInterception__';
+	private $filter;
+	private $requiredFile;
 
-    public function setRequiredFile($file)
-    {
-        $this->requiredFile = $file;
-    }
+	public function setRequiredFile($file) {
+		$this->requiredFile = $file;
+	}
 
-    public function setPrefix($prefix)
-    {
-        $this->prefix = $prefix;
-    }
+	public function setPrefix($prefix) {
+		$this->prefix = $prefix;
+	}
 
-    public function setFilter(\Closure $filter)
-    {
-        $this->filter = $filter;
-    }
+	public function setFilter(\Closure $filter) {
+		$this->filter = $filter;
+	}
 
-    public function generate(\ReflectionClass $originalClass, PhpClass $genClass)
-    {
-        $methods = ReflectionUtils::getOverrideableMethods($originalClass);
+	public function generate(\ReflectionClass $originalClass,
+			PhpClass $genClass) {
+		$methods = ReflectionUtils::getOverrideableMethods($originalClass);
 
-        if (null !== $this->filter) {
-            $methods = array_filter($methods, $this->filter);
-        }
+		if (null !== $this->filter) {
+			$methods = array_filter($methods, $this->filter);
+		}
 
-        if (empty($methods)) {
-            return;
-        }
+		if (empty($methods)) {
+			return;
+		}
 
-        if (!empty($this->requiredFile)) {
-            $genClass->addRequiredFile($this->requiredFile);
-        }
+		if (!empty($this->requiredFile)) {
+			$genClass->addRequiredFile($this->requiredFile);
+		}
 
-        $interceptorLoader = new PhpProperty();
-        $interceptorLoader
-            ->setName($this->prefix.'loader')
-            ->setVisibility(PhpProperty::VISIBILITY_PRIVATE)
-        ;
-        $genClass->setProperty($interceptorLoader);
+		$interceptorLoader = new PhpProperty();
+		$interceptorLoader->setName($this->prefix . 'loader')
+				->setVisibility(PhpProperty::VISIBILITY_PRIVATE);
+		$genClass->setProperty($interceptorLoader);
 
-        $loaderSetter = new PhpMethod();
-        $loaderSetter
-            ->setName($this->prefix.'setLoader')
-            ->setVisibility(PhpMethod::VISIBILITY_PUBLIC)
-            ->setBody('$this->'.$this->prefix.'loader = $loader;')
-        ;
-        $genClass->setMethod($loaderSetter);
-        $loaderParam = new PhpParameter();
-        $loaderParam
-            ->setName('loader')
-            ->setType('CG\Proxy\InterceptorLoaderInterface')
-        ;
-        $loaderSetter->addParameter($loaderParam);
+		$loaderSetter = new PhpMethod();
+		$loaderSetter->setName($this->prefix . 'setLoader')
+				->setVisibility(PhpMethod::VISIBILITY_PUBLIC)
+				->setBody('$this->' . $this->prefix . 'loader = $loader;');
+		$genClass->setMethod($loaderSetter);
+		$loaderParam = new PhpParameter();
+		$loaderParam->setName('loader')
+				->setType('CG\Proxy\InterceptorLoaderInterface');
+		$loaderSetter->addParameter($loaderParam);
 
-        $interceptorCode =
-             '$ref = new \ReflectionMethod(%s, %s);'."\n"
-            .'$interceptors = $this->'.$this->prefix.'loader->loadInterceptors($ref, $this, array(%s));'."\n"
-        	.'$invocation = new \CG\Proxy\MethodInvocation($ref, $this, array(%s), $interceptors);'."\n\n"
-            .'return $invocation->proceed();'
-        ;
+		$interceptorCode = '$ref = new \ReflectionMethod(%s, %s);' . "\n"
+				. '$interceptors = $this->' . $this->prefix
+				. 'loader->loadInterceptors($ref, $this, array(%s));' . "\n"
+				. '$invocation = new \CG\Proxy\MethodInvocation($ref, $this, array(%s), $interceptors);'
+				. "\n\n" . 'return $invocation->proceed();';
 
-        foreach ($methods as $method) {
-            $params = array();
-            foreach ($method->getParameters() as $param) {
-                $params[] = '$'.$param->name;
-            }
-            $params = implode(', ', $params);
+		foreach ($methods as $method) {
+			$params = array();
+			foreach ($method->getParameters() as $param) {
+				$params[] = '$' . $param->name;
+			}
+			$params = implode(', ', $params);
 
-            $genMethod = PhpMethod::fromReflection($method)
-                ->setBody(sprintf($interceptorCode, var_export(ClassUtils::getUserClass($method->class), true), var_export($method->name, true), $params, $params))
-                ->setDocblock(null)
-            ;
-            $genClass->setMethod($genMethod);
-        }
-    }
+			$genMethod = PhpMethod::fromReflection($method)
+					->setBody(
+							sprintf($interceptorCode,
+									var_export(
+											ClassUtils::getUserClass(
+													$method->class), true),
+									var_export($method->name, true), $params,
+									$params))->setDocblock(null);
+			$genClass->setMethod($genMethod);
+		}
+	}
 }

@@ -18,23 +18,20 @@
 
 namespace Metadata\Driver;
 
-final class DriverChain implements DriverInterface
-{
-    private $drivers;
+final class DriverChain implements DriverInterface {
+	private $drivers;
 
-    public function __construct(array $drivers)
-    {
-        $this->drivers = $drivers;
-    }
+	public function __construct(array $drivers) {
+		$this->drivers = $drivers;
+	}
 
-    public function loadMetadataForClass(\ReflectionClass $class)
-    {
-        foreach ($this->drivers as $driver) {
-            if (null !== $metadata = $driver->loadMetadataForClass($class)) {
-                return $metadata;
-            }
-        }
+	public function loadMetadataForClass(\ReflectionClass $class) {
+		foreach ($this->drivers as $driver) {
+			if (null !== $metadata = $driver->loadMetadataForClass($class)) {
+				return $metadata;
+			}
+		}
 
-        return null;
-    }
+		return null;
+	}
 }

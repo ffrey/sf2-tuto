@@ -18,7 +18,6 @@
 
 namespace Metadata;
 
-interface MetadataFactoryInterface
-{
-    function getMetadataForClass($className);
+interface MetadataFactoryInterface {
+	function getMetadataForClass($className);
 }

@@ -23,12 +23,12 @@ use JMS\AopBundle\DependencyInjection\Compiler\PointcutMatchingPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class JMSAopBundle extends Bundle
-{
+class JMSAopBundle extends Bundle {
 	const VERSION = '1.0.0';
 
-    public function build(ContainerBuilder $container)
-    {
-        $container->addCompilerPass(new PointcutMatchingPass(), PassConfig::TYPE_AFTER_REMOVING);
-    }
+	public function build(ContainerBuilder $container) {
+		$container
+				->addCompilerPass(new PointcutMatchingPass(),
+						PassConfig::TYPE_AFTER_REMOVING);
+	}
 }

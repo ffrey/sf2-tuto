@@ -28,7 +28,6 @@ use CG\Generator\PhpClass;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-interface GeneratorStrategyInterface
-{
-    function generate(PhpClass $class);
+interface GeneratorStrategyInterface {
+	function generate(PhpClass $class);
 }

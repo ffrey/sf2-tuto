@@ -1,5 +1,3 @@
 # 2013 03 12
-=> 'forms' chap 12 : p.144 
-## form embedding
-! erreur : Fatal error: Declaration of Acme\TaskBundle\Form\Type\CategoryType::setDefaultOptions() must be compatible with that of Symfony\Component\Form\FormTypeInterface::setDefaultOptions() 
-in C:\PROJETS_WEB\sf2\sf2-tuto\path\src\Acme\TaskBundle\Form\Type\CategoryType.php on line 24
+=> 'forms' chap 12 : p.150 "Creating Form Classes"
+

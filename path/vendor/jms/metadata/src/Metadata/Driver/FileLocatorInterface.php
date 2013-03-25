@@ -2,7 +2,6 @@
 
 namespace Metadata\Driver;
 
-interface FileLocatorInterface
-{
-    function findFileForClass(\ReflectionClass $class, $extension);
+interface FileLocatorInterface {
+	function findFileForClass(\ReflectionClass $class, $extension);
 }

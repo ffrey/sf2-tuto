@@ -18,17 +18,14 @@
 
 namespace JMS\AopBundle\Aop;
 
-final class PointcutContainer
-{
-    private $pointcuts;
+final class PointcutContainer {
+	private $pointcuts;
 
-    public function __construct(array $pointcuts)
-    {
-        $this->pointcuts = $pointcuts;
-    }
+	public function __construct(array $pointcuts) {
+		$this->pointcuts = $pointcuts;
+	}
 
-    public function getPointcuts()
-    {
-        return $this->pointcuts;
-    }
+	public function getPointcuts() {
+		return $this->pointcuts;
+	}
 }

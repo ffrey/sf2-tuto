@@ -21,19 +21,16 @@ namespace JMS\AopBundle\Tests\DependencyInjection\Compiler\Fixture;
 use CG\Proxy\MethodInvocation;
 use CG\Proxy\MethodInterceptorInterface;
 
-class LoggingInterceptor implements MethodInterceptorInterface
-{
-    private $log = array();
+class LoggingInterceptor implements MethodInterceptorInterface {
+	private $log = array();
 
-    public function getLog()
-    {
-        return $this->log;
-    }
+	public function getLog() {
+		return $this->log;
+	}
 
-    public function intercept(MethodInvocation $invocation)
-    {
-        $this->log[] = $invocation->reflection->name;
+	public function intercept(MethodInvocation $invocation) {
+		$this->log[] = $invocation->reflection->name;
 
-        return $invocation->proceed();
-    }
+		return $invocation->proceed();
+	}
 }

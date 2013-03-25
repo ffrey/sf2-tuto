@@ -20,16 +20,18 @@ namespace CG\Core;
 
 use CG\Proxy\Enhancer;
 
-abstract class ClassUtils
-{
-    public static function getUserClass($className)
-    {
-    	if (false === $pos = strrpos($className, '\\'.NamingStrategyInterface::SEPARATOR.'\\')) {
-    		return $className;
-    	}
+abstract class ClassUtils {
+	public static function getUserClass($className) {
+		if (false
+				=== $pos = strrpos($className,
+						'\\' . NamingStrategyInterface::SEPARATOR . '\\')) {
+			return $className;
+		}
 
-    	return substr($className, $pos + NamingStrategyInterface::SEPARATOR_LENGTH + 2);
-    }
+		return substr($className,
+				$pos + NamingStrategyInterface::SEPARATOR_LENGTH + 2);
+	}
 
-    private final function __construct() {}
+	private final function __construct() {
+	}
 }

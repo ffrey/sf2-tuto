@@ -25,36 +25,33 @@ use CG\Generator\PhpClass;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class AbstractClassGenerator implements ClassGeneratorInterface
-{
-    private $namingStrategy;
-    private $generatorStrategy;
+abstract class AbstractClassGenerator implements ClassGeneratorInterface {
+	private $namingStrategy;
+	private $generatorStrategy;
 
-    public function setNamingStrategy(NamingStrategyInterface $namingStrategy = null)
-    {
-        $this->namingStrategy = $namingStrategy;
-    }
+	public function setNamingStrategy(
+			NamingStrategyInterface $namingStrategy = null) {
+		$this->namingStrategy = $namingStrategy;
+	}
 
-    public function setGeneratorStrategy(GeneratorStrategyInterface $generatorStrategy = null)
-    {
-        $this->generatorStrategy = $generatorStrategy;
-    }
+	public function setGeneratorStrategy(
+			GeneratorStrategyInterface $generatorStrategy = null) {
+		$this->generatorStrategy = $generatorStrategy;
+	}
 
-    public function getClassName(\ReflectionClass $class)
-    {
-        if (null === $this->namingStrategy) {
-            $this->namingStrategy = new DefaultNamingStrategy();
-        }
+	public function getClassName(\ReflectionClass $class) {
+		if (null === $this->namingStrategy) {
+			$this->namingStrategy = new DefaultNamingStrategy();
+		}
 
-        return $this->namingStrategy->getClassName($class);
-    }
+		return $this->namingStrategy->getClassName($class);
+	}
 
-    protected function generateCode(PhpClass $class)
-    {
-        if (null === $this->generatorStrategy) {
-            $this->generatorStrategy = new DefaultGeneratorStrategy();
-        }
+	protected function generateCode(PhpClass $class) {
+		if (null === $this->generatorStrategy) {
+			$this->generatorStrategy = new DefaultGeneratorStrategy();
+		}
 
-        return $this->generatorStrategy->generate($class);
-    }
+		return $this->generatorStrategy->generate($class);
+	}
 }

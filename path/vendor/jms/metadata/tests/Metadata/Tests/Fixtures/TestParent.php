@@ -2,6 +2,5 @@
 
 namespace Metadata\Tests\Fixtures;
 
-class TestParent extends TestObject
-{
+class TestParent extends TestObject {
 }

@@ -26,44 +26,36 @@ namespace Metadata;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class PropertyMetadata implements \Serializable
-{
-    public $class;
-    public $name;
-    public $reflection;
+class PropertyMetadata implements \Serializable {
+	public $class;
+	public $name;
+	public $reflection;
 
-    public function __construct($class, $name)
-    {
-        $this->class = $class;
-        $this->name = $name;
+	public function __construct($class, $name) {
+		$this->class = $class;
+		$this->name = $name;
 
-        $this->reflection = new \ReflectionProperty($class, $name);
-        $this->reflection->setAccessible(true);
-    }
+		$this->reflection = new \ReflectionProperty($class, $name);
+		$this->reflection->setAccessible(true);
+	}
 
-    public function getValue($obj)
-    {
-        return $this->reflection->getValue($obj);
-    }
+	public function getValue($obj) {
+		return $this->reflection->getValue($obj);
+	}
 
-    public function setValue($obj, $value)
-    {
-        $this->reflection->setValue($obj, $value);
-    }
+	public function setValue($obj, $value) {
+		$this->reflection->setValue($obj, $value);
+	}
 
-    public function serialize()
-    {
-        return serialize(array(
-            $this->class,
-            $this->name,
-        ));
-    }
+	public function serialize() {
+		return serialize(
+				array($this->class, $this->name,));
+	}
 
-    public function unserialize($str)
-    {
-        list($this->class, $this->name) = unserialize($str);
+	public function unserialize($str) {
+		list($this->class, $this->name) = unserialize($str);
 
-        $this->reflection = new \ReflectionProperty($this->class, $this->name);
-        $this->reflection->setAccessible(true);
-    }
+		$this->reflection = new \ReflectionProperty($this->class, $this->name);
+		$this->reflection->setAccessible(true);
+	}
 }

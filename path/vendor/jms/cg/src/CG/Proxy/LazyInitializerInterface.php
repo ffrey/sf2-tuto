@@ -26,13 +26,12 @@ namespace CG\Proxy;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-interface LazyInitializerInterface
-{
-    /**
-     * Initializes the passed object.
-     *
-     * @param object $object
-     * @return void
-     */
-    function initializeObject($object);
+interface LazyInitializerInterface {
+	/**
+	 * Initializes the passed object.
+	 *
+	 * @param object $object
+	 * @return void
+	 */
+	function initializeObject($object);
 }

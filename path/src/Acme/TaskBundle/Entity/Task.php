@@ -5,7 +5,7 @@ namespace Acme\TaskBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 class Task {
 	/**
-	 * TODO : 2013 03 18 : ne fonctionne pas...
+	 * ! activer les annotations de validation dans app/config/config.yml !
 	 * @Assert\MinLength(
 	 *   limit=3,
 	 *   message="Title should have at least {{ limit }} characters."

@@ -2,13 +2,20 @@
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
-$loader = require __DIR__.'/../vendor/autoload.php';
-$loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Controller');
+$loader = require __DIR__ . '/../vendor/autoload.php';
+$loader
+		->add('',
+				__DIR__
+						. '/../vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Controller');
 // intl
 if (!function_exists('intl_get_error_code')) {
-    require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
+	require_once __DIR__
+			. '/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
 
-    $loader->add('', __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
+	$loader
+			->add('',
+					__DIR__
+							. '/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs');
 }
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));

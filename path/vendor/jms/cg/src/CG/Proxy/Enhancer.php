@@ -37,122 +37,126 @@ use CG\Core\AbstractClassGenerator;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class Enhancer extends AbstractClassGenerator
-{
-    private $generatedClass;
-    private $class;
-    private $interfaces;
-    private $generators;
+class Enhancer extends AbstractClassGenerator {
+	private $generatedClass;
+	private $class;
+	private $interfaces;
+	private $generators;
 
-    public function __construct(\ReflectionClass $class, array $interfaces = array(), array $generators = array())
-    {
-        if (empty($generators) && empty($interfaces)) {
-            throw new \RuntimeException('Either generators, or interfaces must be given.');
-        }
+	public function __construct(\ReflectionClass $class,
+			array $interfaces = array(), array $generators = array()) {
+		if (empty($generators) && empty($interfaces)) {
+			throw new \RuntimeException(
+					'Either generators, or interfaces must be given.');
+		}
 
-        $this->class = $class;
-        $this->interfaces = $interfaces;
-        $this->generators = $generators;
-    }
+		$this->class = $class;
+		$this->interfaces = $interfaces;
+		$this->generators = $generators;
+	}
 
-    /**
-     * Creates a new instance  of the enhanced class.
-     *
-     * @param array $args
-     * @return object
-     */
-    public function createInstance(array $args = array())
-    {
-        $generatedClass = $this->getClassName($this->class);
+	/**
+	 * Creates a new instance  of the enhanced class.
+	 *
+	 * @param array $args
+	 * @return object
+	 */
+	public function createInstance(array $args = array()) {
+		$generatedClass = $this->getClassName($this->class);
 
-        if (!class_exists($generatedClass, false)) {
-            eval($this->generateClass());
-        }
+		if (!class_exists($generatedClass, false)) {
+			eval($this->generateClass());
+		}
 
-        $ref = new \ReflectionClass($generatedClass);
+		$ref = new \ReflectionClass($generatedClass);
 
-        return $ref->newInstanceArgs($args);
-    }
+		return $ref->newInstanceArgs($args);
+	}
 
-    public function writeClass($filename)
-    {
-        if (!is_dir($dir = dirname($filename))) {
-            if (false === @mkdir($dir, 0777, true)) {
-                throw new \RuntimeException(sprintf('Could not create directory "%s".', $dir));
-            }
-        }
+	public function writeClass($filename) {
+		if (!is_dir($dir = dirname($filename))) {
+			if (false === @mkdir($dir, 0777, true)) {
+				throw new \RuntimeException(
+						sprintf('Could not create directory "%s".', $dir));
+			}
+		}
 
-        if (!is_writable($dir)) {
-            throw new \RuntimeException(sprintf('The directory "%s" is not writable.', $dir));
-        }
+		if (!is_writable($dir)) {
+			throw new \RuntimeException(
+					sprintf('The directory "%s" is not writable.', $dir));
+		}
 
-        file_put_contents($filename, "<?php\n\n".$this->generateClass());
-    }
+		file_put_contents($filename, "<?php\n\n" . $this->generateClass());
+	}
 
-    /**
-     * Creates a new enhanced class
-     *
-     * @return string
-     */
-    public final function generateClass()
-    {
-        static $docBlock;
-        if (empty($docBlock)) {
-            $writer = new Writer();
-            $writer
-                ->writeln('/**')
-                ->writeln(' * CG library enhanced proxy class.')
-                ->writeln(' *')
-                ->writeln(' * This code was generated automatically by the CG library, manual changes to it')
-                ->writeln(' * will be lost upon next generation.')
-                ->writeln(' */')
-            ;
-            $docBlock = $writer->getContent();
-        }
+	/**
+	 * Creates a new enhanced class
+	 *
+	 * @return string
+	 */
+	public final function generateClass() {
+		static $docBlock;
+		if (empty($docBlock)) {
+			$writer = new Writer();
+			$writer->writeln('/**')
+					->writeln(' * CG library enhanced proxy class.')
+					->writeln(' *')
+					->writeln(
+							' * This code was generated automatically by the CG library, manual changes to it')
+					->writeln(' * will be lost upon next generation.')
+					->writeln(' */');
+			$docBlock = $writer->getContent();
+		}
 
-        $this->generatedClass = PhpClass::create()
-            ->setDocblock($docBlock)
-            ->setParentClassName($this->class->name)
-        ;
+		$this->generatedClass = PhpClass::create()->setDocblock($docBlock)
+				->setParentClassName($this->class->name);
 
-        $proxyClassName = $this->getClassName($this->class);
-        if (false === strpos($proxyClassName, NamingStrategyInterface::SEPARATOR)) {
-            throw new \RuntimeException(sprintf('The proxy class name must be suffixed with "%s" and an optional string, but got "%s".', NamingStrategyInterface::SEPARATOR, $proxyClassName));
-        }
-        $this->generatedClass->setName($proxyClassName);
+		$proxyClassName = $this->getClassName($this->class);
+		if (false
+				=== strpos($proxyClassName, NamingStrategyInterface::SEPARATOR)) {
+			throw new \RuntimeException(
+					sprintf(
+							'The proxy class name must be suffixed with "%s" and an optional string, but got "%s".',
+							NamingStrategyInterface::SEPARATOR,
+							$proxyClassName));
+		}
+		$this->generatedClass->setName($proxyClassName);
 
-        if (!empty($this->interfaces)) {
-            $this->generatedClass->setInterfaceNames(array_map(function($v) { return '\\'.$v; }, $this->interfaces));
+		if (!empty($this->interfaces)) {
+			$this->generatedClass
+					->setInterfaceNames(
+							array_map(function ($v) {
+										return '\\' . $v;
+									}, $this->interfaces));
 
-            foreach ($this->getInterfaceMethods() as $method) {
-                $method = PhpMethod::fromReflection($method);
-                $method->setAbstract(false);
+			foreach ($this->getInterfaceMethods() as $method) {
+				$method = PhpMethod::fromReflection($method);
+				$method->setAbstract(false);
 
-                $this->generatedClass->setMethod($method);
-            }
-        }
+				$this->generatedClass->setMethod($method);
+			}
+		}
 
-        if (!empty($this->generators)) {
-            foreach ($this->generators as $generator) {
-                $generator->generate($this->class, $this->generatedClass);
-            }
-        }
+		if (!empty($this->generators)) {
+			foreach ($this->generators as $generator) {
+				$generator->generate($this->class, $this->generatedClass);
+			}
+		}
 
-        return $this->generateCode($this->generatedClass);
-    }
+		return $this->generateCode($this->generatedClass);
+	}
 
-    /**
-     * Adds stub methods for the interfaces that have been implemented.
-     */
-    protected function getInterfaceMethods()
-    {
-        $methods = array();
+	/**
+	 * Adds stub methods for the interfaces that have been implemented.
+	 */
+	protected function getInterfaceMethods() {
+		$methods = array();
 
-        foreach ($this->interfaces as $interface) {
-            $ref = new \ReflectionClass($interface);
-            $methods = array_merge($methods, $ref->getMethods());
-        }
+		foreach ($this->interfaces as $interface) {
+			$ref = new \ReflectionClass($interface);
+			$methods = array_merge($methods, $ref->getMethods());
+		}
 
-        return $methods;
-    }
+		return $methods;
+	}
 }

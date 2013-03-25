@@ -23,19 +23,17 @@ namespace CG\Core;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class DefaultNamingStrategy implements NamingStrategyInterface
-{
+class DefaultNamingStrategy implements NamingStrategyInterface {
 	private $prefix;
 
-	public function __construct($prefix = 'EnhancedProxy')
-	{
+	public function __construct($prefix = 'EnhancedProxy') {
 		$this->prefix = $prefix;
 	}
 
-    public function getClassName(\ReflectionClass $class)
-    {
-        $userClass = ClassUtils::getUserClass($class->name);
+	public function getClassName(\ReflectionClass $class) {
+		$userClass = ClassUtils::getUserClass($class->name);
 
-        return $this->prefix.'_'.sha1($class->name).'\\'.self::SEPARATOR.'\\'.$userClass;
-    }
+		return $this->prefix . '_' . sha1($class->name) . '\\'
+				. self::SEPARATOR . '\\' . $userClass;
+	}
 }

@@ -18,15 +18,12 @@
 
 namespace JMS\AopBundle\Tests\DependencyInjection\Compiler\Fixture;
 
-class TestService
-{
-    public function add()
-    {
-        return true;
-    }
+class TestService {
+	public function add() {
+		return true;
+	}
 
-    public function delete()
-    {
-        return true;
-    }
+	public function delete() {
+		return true;
+	}
 }

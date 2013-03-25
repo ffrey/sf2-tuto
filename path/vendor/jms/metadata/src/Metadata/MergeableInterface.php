@@ -2,7 +2,6 @@
 
 namespace Metadata;
 
-interface MergeableInterface
-{
-    function merge(MergeableInterface $object);
+interface MergeableInterface {
+	function merge(MergeableInterface $object);
 }

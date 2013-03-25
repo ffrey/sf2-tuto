@@ -20,15 +20,12 @@ namespace JMS\AopBundle\Tests\DependencyInjection\Compiler\Fixture;
 
 use JMS\AopBundle\Aop\PointcutInterface;
 
-class LoggingPointcut implements PointcutInterface
-{
-    public function matchesClass(\ReflectionClass $class)
-    {
-        return true;
-    }
+class LoggingPointcut implements PointcutInterface {
+	public function matchesClass(\ReflectionClass $class) {
+		return true;
+	}
 
-    public function matchesMethod(\ReflectionMethod $method)
-    {
-        return false !== strpos($method->name, 'delete');
-    }
+	public function matchesMethod(\ReflectionMethod $method) {
+		return false !== strpos($method->name, 'delete');
+	}
 }

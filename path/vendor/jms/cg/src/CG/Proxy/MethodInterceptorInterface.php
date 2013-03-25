@@ -29,14 +29,13 @@ namespace CG\Proxy;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-interface MethodInterceptorInterface
-{
-    /**
-     * Called when intercepting a method call.
-     *
-     * @param MethodInvocation $invocation
-     * @return mixed the return value for the method invocation
-     * @throws \Exception may throw any exception
-     */
-    function intercept(MethodInvocation $invocation);
+interface MethodInterceptorInterface {
+	/**
+	 * Called when intercepting a method call.
+	 *
+	 * @param MethodInvocation $invocation
+	 * @return mixed the return value for the method invocation
+	 * @throws \Exception may throw any exception
+	 */
+	function intercept(MethodInvocation $invocation);
 }

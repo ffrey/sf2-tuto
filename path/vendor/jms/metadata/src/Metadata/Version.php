@@ -18,7 +18,6 @@
 
 namespace Metadata;
 
-final class Version
-{
-    const VERSION = '1.1.1';
+final class Version {
+	const VERSION = '1.1.1';
 }

@@ -25,22 +25,20 @@ namespace JMS\AopBundle\Aop;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class RegexPointcut implements PointcutInterface
-{
-    private $pattern;
+class RegexPointcut implements PointcutInterface {
+	private $pattern;
 
-    public function __construct($pattern)
-    {
-        $this->pattern = $pattern;
-    }
+	public function __construct($pattern) {
+		$this->pattern = $pattern;
+	}
 
-    public function matchesClass(\ReflectionClass $class)
-    {
-        return true;
-    }
+	public function matchesClass(\ReflectionClass $class) {
+		return true;
+	}
 
-    public function matchesMethod(\ReflectionMethod $method)
-    {
-        return 0 < preg_match('#'.$this->pattern.'#', sprintf('%s::%s', $method->class, $method->name));
-    }
+	public function matchesMethod(\ReflectionMethod $method) {
+		return 0
+				< preg_match('#' . $this->pattern . '#',
+						sprintf('%s::%s', $method->class, $method->name));
+	}
 }

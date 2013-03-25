@@ -25,12 +25,11 @@ use CG\Generator\PhpClass;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-interface ClassGeneratorInterface
-{
-    /**
-     * Generates the PHP class.
-     *
-     * @return string
-     */
-    function generateClass();
+interface ClassGeneratorInterface {
+	/**
+	 * Generates the PHP class.
+	 *
+	 * @return string
+	 */
+	function generateClass();
 }

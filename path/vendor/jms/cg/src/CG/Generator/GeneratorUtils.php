@@ -23,16 +23,19 @@ namespace CG\Generator;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-abstract class GeneratorUtils
-{
-    private final function __construct() {}
+abstract class GeneratorUtils {
+	private final function __construct() {
+	}
 
-    public static function callMethod(\ReflectionMethod $method, array $params = null)
-    {
-        if (null === $params) {
-            $params = array_map(function($p) { return '$'.$p->name; }, $method->getParameters());
-        }
+	public static function callMethod(\ReflectionMethod $method,
+			array $params = null) {
+		if (null === $params) {
+			$params = array_map(function ($p) {
+						return '$' . $p->name;
+					}, $method->getParameters());
+		}
 
-        return '\\'.$method->getDeclaringClass()->name.'::'.$method->name.'('.implode(', ', $params).')';
-    }
+		return '\\' . $method->getDeclaringClass()->name . '::' . $method->name
+				. '(' . implode(', ', $params) . ')';
+	}
 }

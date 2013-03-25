@@ -29,25 +29,27 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class JMSAopExtension extends Extension
-{
-    /**
-     * {@inheritDoc}
-     */
-    public function load(array $configs, ContainerBuilder $container)
-    {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+class JMSAopExtension extends Extension {
+	/**
+	 * {@inheritDoc}
+	 */
+	public function load(array $configs, ContainerBuilder $container) {
+		$configuration = new Configuration();
+		$config = $this->processConfiguration($configuration, $configs);
 
-        $cacheDir = $container->getParameterBag()->resolveValue($config['cache_dir']);
-        if (!is_dir($cacheDir)) {
-            if (false === @mkdir($cacheDir, 0777, true)) {
-                throw new RuntimeException(sprintf('Could not create cache directory "%s".', $cacheDir));
-            }
-        }
-        $container->setParameter('jms_aop.cache_dir', $cacheDir);
+		$cacheDir = $container->getParameterBag()
+				->resolveValue($config['cache_dir']);
+		if (!is_dir($cacheDir)) {
+			if (false === @mkdir($cacheDir, 0777, true)) {
+				throw new RuntimeException(
+						sprintf('Could not create cache directory "%s".',
+								$cacheDir));
+			}
+		}
+		$container->setParameter('jms_aop.cache_dir', $cacheDir);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
-    }
+		$loader = new Loader\XmlFileLoader($container,
+				new FileLocator(__DIR__ . '/../Resources/config'));
+		$loader->load('services.xml');
+	}
 }

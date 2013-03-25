@@ -18,7 +18,6 @@
 
 namespace Metadata\Driver;
 
-interface DriverInterface
-{
-    function loadMetadataForClass(\ReflectionClass $class);
+interface DriverInterface {
+	function loadMetadataForClass(\ReflectionClass $class);
 }

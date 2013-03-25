@@ -5,7 +5,11 @@
 
 <form action="{{ path('task_new') }}" method="post" {{ form_enctype(form) }}>
 	{{ form_errors(form) }}
-	{{ form_row(form.task) }}
+	<div>
+		{{ form_label(form.task, 'Type in your new task : ') }}
+		{{ form_errors(form.task) }}
+		{{ form_widget(form.task) }}
+	</div>
 	{{ form_row(form.dueDate) }}
 	<h3>Category</h3>
 <div class="category">

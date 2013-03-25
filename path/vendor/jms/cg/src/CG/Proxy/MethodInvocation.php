@@ -29,49 +29,47 @@ namespace CG\Proxy;
  *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
-class MethodInvocation
-{
-    public $reflection;
-    public $object;
-    public $arguments;
+class MethodInvocation {
+	public $reflection;
+	public $object;
+	public $arguments;
 
-    private $interceptors;
-    private $pointer;
+	private $interceptors;
+	private $pointer;
 
-    public function __construct(\ReflectionMethod $reflection, $object, array $arguments, array $interceptors)
-    {
-        $this->reflection = $reflection;
-        $this->object = $object;
-        $this->arguments = $arguments;
-        $this->interceptors = $interceptors;
-        $this->pointer = 0;
-    }
+	public function __construct(\ReflectionMethod $reflection, $object,
+			array $arguments, array $interceptors) {
+		$this->reflection = $reflection;
+		$this->object = $object;
+		$this->arguments = $arguments;
+		$this->interceptors = $interceptors;
+		$this->pointer = 0;
+	}
 
-    /**
-     * Proceeds down the call-chain and eventually calls the original method.
-     *
-     * @return mixed
-     */
-    public function proceed()
-    {
-        if (isset($this->interceptors[$this->pointer])) {
-            return $this->interceptors[$this->pointer++]->intercept($this);
-        }
+	/**
+	 * Proceeds down the call-chain and eventually calls the original method.
+	 *
+	 * @return mixed
+	 */
+	public function proceed() {
+		if (isset($this->interceptors[$this->pointer])) {
+			return $this->interceptors[$this->pointer++]->intercept($this);
+		}
 
-        $this->reflection->setAccessible(true);
+		$this->reflection->setAccessible(true);
 
-        return $this->reflection->invokeArgs($this->object, $this->arguments);
-    }
+		return $this->reflection->invokeArgs($this->object, $this->arguments);
+	}
 
-    /**
-     * Returns a string representation of the method.
-     *
-     * This is intended for debugging purposes only.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return sprintf('%s::%s', $this->reflection->class, $this->reflection->name);
-    }
+	/**
+	 * Returns a string representation of the method.
+	 *
+	 * This is intended for debugging purposes only.
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return sprintf('%s::%s', $this->reflection->class,
+				$this->reflection->name);
+	}
 }
